@@ -1,0 +1,38 @@
+-- create database db_Policia; 
+-- use db_Policia;
+
+create table tb_Soldado (
+	IDSoldado int not null primary key auto_increment,
+    RM int,
+    Nome varchar(50),
+    DataNascimento date
+) default charset utf8mb4;
+
+create table tb_Municao (
+	IDMunicao int not null primary key auto_increment,
+    Calibre varchar(20)
+) default charset utf8mb4;
+
+create table tb_Arma (
+	IDArma int not null primary key auto_increment,
+    IDMunicao int,
+    foreign key (IDMunicao) references tb_Municao(IDMunicao),
+    IDSoldado int,
+    foreign key (IDSoldado) references tb_Soldado(IDSoldado),
+    NumSerie int,
+    Tipo varchar(30),
+    Calibre varchar(20)
+) default charset utf8mb4;
+
+create table tb_Limpeza (
+	IDLimpeza int not null primary key auto_increment,
+	IDSoldado int,
+    foreign key (IDSoldado) references tb_Soldado(IDSoldado),
+    IDArma int,
+    foreign key (IDArma) references tb_Arma(IDArma)
+) default charset utf8mb4;
+
+show tables;
+
+
+
