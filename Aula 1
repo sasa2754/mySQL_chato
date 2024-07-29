@@ -1,0 +1,29 @@
+# create database Teste;
+# use Teste;
+
+create table Aluno (
+	IDAluno int not null primary key auto_increment,
+    Nome varchar(255) not null,
+    Sobrenome varchar(255) not null
+) default charset utf8mb4;
+
+create table Professor (
+	IDProfessor int not null primary key auto_increment,
+    Nome varchar(255) not null,
+    Sobrenome varchar(255) not null
+) default charset utf8mb4;
+
+create table Turma (
+	IDTurma int not null primary key auto_increment,
+    IDAluno int,
+	IDProfessor int,
+    foreign key (IDAluno) references Aluno(IDAluno),
+    foreign key (IDProfessor) references Professor(IDProfessor)
+) default charset utf8mb4;
+
+-- show tables;
+
+-- drop table Aluno;
+-- drop table Professor;
+
+drop table Turma;
