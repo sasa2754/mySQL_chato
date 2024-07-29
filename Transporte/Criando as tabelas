@@ -1,0 +1,62 @@
+-- create database db_Transporte;
+-- use db_Transporte;
+
+create table tb_Armazem (
+	IDArmazem int not null primary key auto_increment,
+	Endereco varchar(255)
+) default charset utf8mb4;
+
+create table tb_Produto (
+	IDProduto int not null primary key auto_increment,
+    Nome varchar(50),
+    Descricao varchar(255),
+    Preco float
+) default charset utf8mb4;
+
+create table tb_Caminhao (
+	IDCaminhao int not null primary key auto_increment,
+    Capacidade int,
+    NomeMotorista varchar(50)
+) default charset utf8mb4;
+
+create table tb_Loja (
+	IDLoja int not null primary key auto_increment,
+    Endereco varchar(255)
+) default charset utf8mb4;
+
+create table tb_ArmazemLoja (
+	IDArmazemLoja int not null primary key auto_increment,
+    IDArmazem int,
+    foreign key (IDArmazem) references tb_Armazem(IDArmazem),
+    IDLoja int,
+    foreign key (IDLoja) references tb_Loja(IDLoja)
+) default charset utf8mb4; 
+
+create table tb_Encomenda (
+	IDEncomenda int not null primary key auto_increment,
+    IDLoja int,
+    foreign key (IDLoja) references tb_Loja(IDLoja)
+) default charset utf8mb4;
+
+create table tb_EncomendaProduto (
+	IDEncomendaProduto int not null primary key auto_increment,
+    IDEncomenda int,
+    foreign key (IDEncomenda) references tb_Encomenda(IDEncomenda),
+    IDProduto int,
+    foreign key (IDProduto) references tb_Produto(IDProduto),
+    Qtd int,
+    ValorTotal float
+) default charset utf8mb4;
+
+
+create table tb_Viagem (
+	IDViagem int not null primary key auto_increment,
+	IDEncomenda int,
+    foreign key (IDEncomenda) references tb_Encomenda(IDEncomenda),
+    IDCaminhao int,
+    foreign key (IDCaminhao) references tb_Caminhao(IDCaminhao),
+    Destino varchar(255)
+) default charset utf8mb4;
+
+
+show tables;
