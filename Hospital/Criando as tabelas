@@ -1,0 +1,50 @@
+-- create database db_Hospital;
+-- use db_Hospital;
+
+create table tb_Medico (
+	IDMedico int not null primary key auto_increment,
+    CRM varchar(9),
+    Nome varchar(40),
+    Especialidade varchar(30)
+) default charset utf8mb4;
+
+create table tb_Exame (
+	IDExame int not null primary key auto_increment,
+    Nome varchar(50),
+    Resultado varchar(255),
+    Descrição varchar(50)
+) default charset utf8mb4;
+
+create table tb_Paciente (
+	IDPaciente int not null primary key auto_increment,
+	Nome varchar(50),
+    Endereco varchar(255),
+    DataNascimento date,
+    CodRegistro int
+) default charset utf8mb4;
+
+create table tb_Medicamento (
+	IDMedicamento int not null primary key auto_increment,
+    Nome varchar(100),
+    Descricao varchar(255)
+) default charset utf8mb4;
+
+create table tb_ConsultaMedicamento (
+	IDConsultaMedicamento int not null primary key auto_increment,
+    IDConsulta int,
+    foreign key (IDConsulta) references tb_Consulta(IDConsulta),
+    IDMedicamento int,
+    foreign key (IDMedicamento) references tb_Medicamento(IDMedicamento)
+) default charset utf8mb4;
+
+create table tb_Consulta (
+	IDConsulta int not null primary key auto_increment,
+    IDMedico int,
+    foreign key (IDMedico) references tb_Medico(IDMedico),
+    IDPaciente int,
+    foreign key (IDPaciente) references tb_Paciente(IDPaciente),
+    IDExame int,
+    foreign key (IDExame) references tb_Exame(IDExame)
+) default charset utf8mb4;
+
+show tables;
