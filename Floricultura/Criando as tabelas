@@ -1,0 +1,45 @@
+-- create database db_Floricultura; 
+-- use db_Floricultura;
+
+create table tb_Produto (
+	IDProduto int not null primary key auto_increment,
+    Nome varchar(50) not null,
+    Tipo varchar(50) not null,
+    Preco float not null,
+    QtdEstoque int not null
+) default charset utf8mb4;
+
+create table tb_Cliente (
+	IDCliente int not null primary key auto_increment,
+    CPF varchar(11),
+    Nome varchar(50),
+    Telefone varchar(11)
+) default charset utf8mb4;
+
+create table tb_Funcionario (
+	IDFuncionario int not null primary key auto_increment,
+    Nome varchar(50),
+    DataNascimento date,
+    Salario float,
+    Telefone varchar(11)
+) default charset utf8mb4;
+
+create table tb_CompraProduto (
+	IDCompraProduto int not null primary key auto_increment,
+    IDCompra int,
+    foreign key (IDCompra) references tb_Compra(IDCompra),
+    IDProduto int,
+    foreign key (IDProduto) references tb_Produto(IDProduto),
+    QtdComprada int
+) default charset utf8mb4;
+
+create table tb_Compra (
+	IDCompra int not null primary key auto_increment,
+	IDFuncionario int,
+    foreign key (IDFuncionario) references tb_Funcionario(IDFuncionario),
+    DataCompra datetime,
+    ValorTotal float
+) default charset utf8mb4;
+
+
+
