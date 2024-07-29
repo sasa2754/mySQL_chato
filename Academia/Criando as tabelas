@@ -1,0 +1,40 @@
+-- create database db_Academia;
+-- use db_Academia;
+
+create table tb_Aluno (
+	IDAluno int not null primary key auto_increment,
+    Nome varchar(50),
+    Idade int,
+    Sexo char(1),
+    Instituicao varchar(100),
+    Telefone varchar(11)
+) default charset utf8mb4;
+
+
+create table tb_Professor (
+	IDProfessor int not null primary key auto_increment,
+    Nome varchar(50),
+    Sobrenome varchar(50),
+    Telefone varchar(11)
+) default charset utf8mb4;
+
+create table tb_Aula (
+	IDAula int not null primary key auto_increment,
+    Modalidade varchar(50),
+    Dificuldade varchar(50),
+    IDProfessor int,
+    foreign key (IDProfessor) references tb_Professor(IDProfessor),
+    Sala varchar(30)
+) default charset utf8mb4;
+
+create table tb_AulaAluno (
+	IDAulaAluno int not null primary key auto_increment,
+    IDAula int,
+    foreign key (IDAula) references tb_Aula(IDAula),
+    IDAluno int,
+    foreign key (IDAluno) references tb_Aluno(IDAluno)
+) default charset utf8mb4;
+
+
+
+show tables;
