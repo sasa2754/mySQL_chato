@@ -10,38 +10,38 @@ create table tb_Cliente (
 
 create table tb_Veiculo (
 	IDVeiculo int not null primary key auto_increment,
-    IDCliente int,
+    IDCliente int not null,
     foreign key (IDCliente) references tb_Cliente(IDCliente),
-    Marca varchar(30),
-    Modelo varchar(30),
-    Ano int,
-    Placa varchar(8),
-    Tipo varchar(3)
+    Marca varchar(30) not null,
+    Modelo varchar(30) not null,
+    Ano int not null,
+    Placa varchar(8) not null,
+    Tipo varchar(3) not null
 ) default charset utf8mb4;
 
 create table tb_OrdemServico (
 	IDOrdemServico int not null primary key auto_increment,
-    IDCliente int,
+    IDCliente int not null,
     foreign key (IDCliente) references tb_Cliente(IDCliente),
-    IDVeiculo int,
+    IDVeiculo int not null,
     foreign key (IDVeiculo) references tb_Veiculo(IDVeiculo),
-    DataEntrada date,
-    DataConclusao date,
-    Status varchar(50),
-    Observacao varchar(255)
+    DataEntrada date not null,
+    DataConclusao date not null,
+    Status varchar(50) not null,
+    Observacao varchar(255) not null
 ) default charset utf8mb4;
 
 create table tb_ListaServico (
 	IDListaServico int not null primary key auto_increment,
-    Descricao varchar(255),
-    Preco float
+    Descricao varchar(255) not null,
+    Preco float not null
 ) default charset utf8mb4;
 
 create table tb_Servico (
 	IDServico int not null primary key auto_increment,
-	IDListaServico int,
+	IDListaServico int not null,
     foreign key (IDListaServico) references tb_ListaServico(IDListaServico),
-    IDOrdemServico int,
+    IDOrdemServico int not null,
     foreign key (IDOrdemServico) references tb_OrdemServico(IDOrdemServico),
-    QtdServico int
+    QtdServico int not null
 ) default charset utf8mb4;
